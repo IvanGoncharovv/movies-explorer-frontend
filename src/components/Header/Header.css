@@ -1,5 +1,53 @@
 .header{
-  background-color: #073042;
+  background-color:#202020;
   margin: 0;
-  padding: 18px 70px;
+  padding: 21px 70px;
+}
+.header__color{
+  background-color: #073042;
+}
+.header__nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header__logo{
+  max-width: 38px;
+  max-height: 38px;
+}
+.header__links{
+  gap: 30px;
+  display: flex;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;  
+  align-items: center;
+}
+
+.header__register {
+  color: white;
+  text-decoration: none;
+}
+
+.header__auth {
+  border-radius: 3px;
+  color: black;
+  background-color: #3DDC84;
+  padding: 8px 20px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 820px) {
+  .header{
+    padding: 15px 30px;
+  }
+  .header__logo{
+    padding-top: 3px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .header{
+    padding: 18px 14px;
+  }
 }

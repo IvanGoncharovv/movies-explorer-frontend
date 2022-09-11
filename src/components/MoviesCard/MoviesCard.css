@@ -1,0 +1,131 @@
+.card {
+  max-width: 360px;
+  max-height: 319px;
+  width: 100%;
+  background-color: #222222;
+}
+
+.card__title {
+  max-width: 240px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 0;
+  margin-right: 14px;
+}
+
+.card__duration {
+  font-weight: 400;
+  max-width: 70px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 18px;
+  color: #8B8B8B;
+  margin: 0;
+}
+
+.card__description{
+  margin: 18px;
+  display: flex;
+}
+
+.card__like {
+  background-image: url('/src/images/Cards/NotSaved.svg');
+  width: 100px;
+  height: 29px;
+  border: none;
+  padding: 0;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: initial;
+  transition: 0.5s;
+  cursor: pointer;
+  margin: 18px auto;
+  display: block;
+}
+
+.card__delete{
+  background-image: url('../../images/Cards/delete.svg');
+  width: 100px;
+  height: 29px;
+  border: 0;
+  border-radius: 30px;
+  padding: 0;
+  background-position: center;
+  background-size: 7px;
+  background-repeat: no-repeat;
+  background-color: #313131;
+  transition: 0.5s;
+  cursor: pointer;
+  margin: 18px auto;
+  display: block;
+}
+.card__saved {
+  width: 22px;
+  height: 22px;
+  border: none;
+  padding: 0;
+  background-position: center;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-color: initial;
+  transition: 0.5s;
+  cursor: pointer;
+  margin-top: 30px;
+  display: block;
+}
+
+.card__like_active {
+  background-image: url('/src/images/Cards/Saved.svg');
+}
+
+.card__img {
+  max-width: 360px;
+  margin: 0;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 820px) {
+  .card {   
+    max-width: 342px;
+    max-height: 309px;
+  }
+  .card__img {
+    max-width: 342px;
+    margin: 0;
+    object-fit: contain;
+  }
+  .card__title {
+    max-width: 224px;
+    margin-right: 12px;
+  }
+  
+}
+
+@media screen and (max-width: 360px) {
+  .card__title {
+    font-size: 12px;
+    margin-right: 22px;
+  }
+  .card__img {
+    width: 100%;
+    max-width: 320px;
+    min-height: 168px;
+}
+.card__duration {
+  font-size: 10px;
+}
+
+.card__description{
+  margin: 14px;
+}
+.card__like {
+  margin: 14px auto;
+}
+
+.card__delete {
+  margin: 14px auto;
+}
+}

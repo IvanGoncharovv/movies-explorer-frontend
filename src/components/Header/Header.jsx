@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
+import Navigation from "../Navigation/Navigation";
 import headerLogo from '../../images/header__logo.svg'
 
-function Header() {
-    return(
-        <header className="header">
-                <nav className="header__nav">
-                    <img className="header__logo" src={headerLogo} alt="Логотип" /> 
-                    <div className="header__link">
-                        <Link className="header__register" to="/sign-in">Регистрация</Link>
-                        <Link className="header__auth" to="/sign-in">Войти</Link>
-                    </div>
-                </nav>
-        </header>
-    )
+function Header({loggedIn, color}) {
+  return(
+    <header className={`header ${color}`} >
+      <div className="header__nav">
+        <Link to="/" className="header__logo">    
+          <img className="header__logo" src={headerLogo} alt="Логотип" />
+        </Link>
+        <Navigation loggedIn={loggedIn}/>
+      </div>
+    </header>
+  )
 }
 
 export default Header;
