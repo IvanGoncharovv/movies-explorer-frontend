@@ -1,6 +1,6 @@
-// const BASE_URL = "https://api.diplom.grave.nomoredomains.work";
+
 import {localStorageConst} from "../const/const";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://api.diploma.grave.nomoredomains.icu";
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -13,7 +13,10 @@ export const signup = ({name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: 'include',
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({name, email, password }),
   }).then(checkResponse);
 };

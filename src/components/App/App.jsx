@@ -19,6 +19,7 @@ function App() {
   const [loginError, setLoginError] = React.useState(false);
   const [registerError, setRegisterError] = React.useState(false);
   const [succesUpdate, setSuccesUpdate] = React.useState(false);
+  const [LoginCheck, setLoginCheck] = React.useState(false);
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -36,6 +37,7 @@ function App() {
         setLoggedIn(true);
         localStorage.setItem(localStorageConst.jwt, data.jwt);
         localStorage.setItem(localStorageConst.email, email);
+        setLoginCheck(true)
          nav("/movies");
       }
     })
@@ -76,8 +78,12 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => {
+          setLoginCheck(true)
+        })
     }
+    else { setLoginCheck(true) }
   }, [jwt]);
 
   //получение данных профиля
@@ -121,16 +127,16 @@ function App() {
           <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
           <Route path="/signin" element={<Login onLogin={onLogin} loginError={loginError}/>}/>
           <Route path="/signup" element={<Register onRegister={onRegister} registerError={registerError}/>}/>
-          <Route path="/movies" element={<Movies loggedIn={loggedIn}/>}/>
-          <Route path="/saved-movies" element={<Movies loggedIn={loggedIn}/>}/>
-          <Route path="/profile" element={<Profile 
+          {LoginCheck && <Route path="/movies" element={<Movies loggedIn={loggedIn}/>}/>}
+          {LoginCheck && <Route path="/saved-movies" element={<Movies loggedIn={loggedIn}/>}/>}
+          {LoginCheck && <Route path="/profile" element={<Profile 
                 loggedIn={loggedIn}
                 email={email}
                 name={name}
                 onUpdateUser={handleUpdateUser}
                 handleSignOut={handleSignOut}
                 succesUpdate={succesUpdate}
-                setSuccesUpdate={setSuccesUpdate}/>}/>
+                setSuccesUpdate={setSuccesUpdate}/>}/>}
           <Route path="*" element={ <NotFound /> } />
         </Routes>
       </div>
