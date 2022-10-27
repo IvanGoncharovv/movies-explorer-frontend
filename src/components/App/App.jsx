@@ -80,7 +80,7 @@ function App() {
           console.log(err);
         })
         .finally(() => {
-          setLoginCheck(false)
+          setLoginCheck(true)
         })
     }
     else { setLoginCheck(true) }
