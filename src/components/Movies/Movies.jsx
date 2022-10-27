@@ -221,7 +221,7 @@ function Movies({loggedIn}) {
       }
       {isLoader && <Preloader />}
 
-{ !isLoader && (isMoviesLocation ?
+    { !isLoader && (isMoviesLocation ?
       <MoviesCardList movies={movies} clickHandler={addMovie} errText={errText} render={isFirstPageLoad}/>
       : <MoviesCardList movies={userMoviesListForView} clickHandler={removeMovie} errText={errText} render={isFirstPageLoad} />)}
       <Footer />

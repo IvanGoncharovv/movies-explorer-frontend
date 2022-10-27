@@ -7,7 +7,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
-import { Route, Routes, useNavigate} from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate} from "react-router-dom";
 import SavedMovies from '../SavedMovies/SavedMovies';
 import * as api from '../../utils/MainApi'
 import { localStorageConst } from "../../const/const";
@@ -80,7 +80,7 @@ function App() {
           console.log(err);
         })
         .finally(() => {
-          setLoginCheck(true)
+          setLoginCheck(false)
         })
     }
     else { setLoginCheck(true) }
@@ -114,8 +114,11 @@ function App() {
 
   //выход
   function handleSignOut() {
+    api.signOut();
     setLoggedIn(false);
     localStorage.removeItem("jwt");
+    localStorage.clear();
+    setCurrentUser({});
     setEmail("");
     nav("/");
   }
@@ -125,18 +128,18 @@ function App() {
       <div className="page" >
         <Routes>
           <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
-          <Route path="/signin" element={<Login onLogin={onLogin} loginError={loginError}/>}/>
-          <Route path="/signup" element={<Register onRegister={onRegister} registerError={registerError}/>}/>
-          {LoginCheck && <Route path="/movies" element={<Movies loggedIn={loggedIn}/>}/>}
-          {LoginCheck && <Route path="/saved-movies" element={<Movies loggedIn={loggedIn}/>}/>}
-          {LoginCheck && <Route path="/profile" element={<Profile 
+          <Route path="/signin" element={!LoginCheck || !loggedIn ?<Login onLogin={onLogin} loginError={loginError}/> : <Navigate to="/" />}/>
+          <Route path="/signup" element={!loggedIn ?<Register onRegister={onRegister} registerError={registerError}/>: <Navigate to="/" />}/>
+          {LoginCheck && <Route path="/movies" element={loggedIn ?<Movies loggedIn={loggedIn}/>: <Navigate to="/" />}/>}
+          {LoginCheck && <Route path="/saved-movies" element={loggedIn ?<Movies loggedIn={loggedIn}/>: <Navigate to="/" />}/>}
+          {LoginCheck && <Route path="/profile" element={loggedIn ?<Profile 
                 loggedIn={loggedIn}
                 email={email}
                 name={name}
                 onUpdateUser={handleUpdateUser}
                 handleSignOut={handleSignOut}
                 succesUpdate={succesUpdate}
-                setSuccesUpdate={setSuccesUpdate}/>}/>}
+                setSuccesUpdate={setSuccesUpdate}/>: <Navigate to="/" />}/>}
           <Route path="*" element={ <NotFound /> } />
         </Routes>
       </div>
