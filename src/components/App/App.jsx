@@ -53,8 +53,8 @@ function App() {
     return api
     .signup({ name, password, email })
     .then((data) => {
-      if (data.data.email) {
-        nav("/signin");
+      if (data) {
+        onLogin({password, email})
       }
     })
     .catch((err) => {
