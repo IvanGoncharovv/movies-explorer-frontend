@@ -1,7 +1,6 @@
 
 import {localStorageConst} from "../const/const";
-// const BASE_URL = "https://api.diploma.grave.nomoredomains.icu";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://api.diploma.grave.nomoredomains.icu";
 
 const checkResponse = (res) => {
   if (res.ok) {
