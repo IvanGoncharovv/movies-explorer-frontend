@@ -3,8 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
-  justify-content: center;
-  padding: 70px 0 35px;
+  padding: 70px 66px 35px;
 }
 
 .cards__btn-block {
@@ -32,11 +31,12 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 880px) {
   .cards {
       row-gap: 24px;
       column-gap: 35px;
       padding: 70px 0 30px;
+      justify-content: center;
   }
 }
 

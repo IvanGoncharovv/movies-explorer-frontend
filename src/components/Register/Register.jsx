@@ -1,24 +1,80 @@
-import React from "react";
-import Auth from '../Auth/Auth';
-import Form from '../Form/Form';
+import React from "react"; 
+import Auth from '../Auth/Auth'; 
+import Form from '../Form/Form'; 
+import ValidationForm from '../../utils/ValidationForm' 
+ 
+ 
+function Register({onRegister, registerError}) { 
+  const validation = ValidationForm(); 
+  const { values, handleChange, errors, isValid, onFocus } = validation; 
+  const { name, email, password } = values; 
+ 
+  const handleSubmit = (e) => { 
+    e.preventDefault(); 
+    onRegister({name, email, password}); 
+    validation.resetForm({name, email, password}); 
+  }; 
 
-function Register() {
+  const inputClassName = (errors)=>{
+    return `form__input ${errors ? 'form__input_active' : ''}`;
+  }
 
-  return (
-    <Auth>
-      <Form textBtn="Зарегистрироваться" textSubtitle="Уже зарегистрированы?" textLink="Войти" to="/signin" title="Добро пожаловать!">
-        <p className="form__input-title">Имя</p>
-        <input type="text" className="form__input" name="name_user" required/>
-        <span className="form__error" id="name_user-error">Что-то пошло не так...</span>
-        <p className="form__input-title">E-mail</p>
-        <input type="email" className="form__input" name="email_user" required/>
-        <span className="form__error" id="email_user-error">Что-то пошло не так...</span>
-        <p className="form__input-title">Пароль</p>
-        <input type="password" className="form__input form__input_active" name="password_user" minLength="8" required/>
-        <span className="form__error form__error_active" id="password_user-error">Что-то пошло не так...</span>
-      </Form>    
-    </Auth>
-  );
-}
-
+  const errorClassName = (errors)=>{
+    return `form__error ${errors ? 'form__error_active' : ''}`;
+  }
+ 
+  return ( 
+    <Auth> 
+      <Form  
+        registerError={registerError}
+        onSubmit={handleSubmit} 
+        isValid={isValid} 
+        validation={validation} 
+      > 
+        <p className="form__input-title">Имя</p> 
+        <input  
+          type="text" 
+          className={inputClassName(errors.name)} 
+          name="name"  
+          onFocus={onFocus}  
+          defaultValue={values.name}  
+          onChange={handleChange}  
+          required/> 
+        <span 
+          className={errorClassName(errors.name)} 
+          id="name">
+          {errors.name}
+        </span>
+        <p className="form__input-title">E-mail</p> 
+        <input  
+          type="email"  
+          className={inputClassName(errors.email)} 
+          name="email" 
+          onFocus={onFocus}  
+          defaultValue={values.email}  
+          onChange={handleChange}  
+          required/> 
+        <span 
+          className={errorClassName(errors.email)}
+          id="email">
+          {errors.email}
+        </span> 
+        <p className="form__input-title">Пароль</p> 
+        <input type="password"  
+          className={inputClassName(errors.password)}  
+          name="password"  
+          onFocus={onFocus}  
+          defaultValue={values.password}  
+          onChange={handleChange}  
+          required/> 
+        <span 
+          className={errorClassName(errors.password)}
+          id="password">
+          {errors.password}
+        </span>
+      </Form>     
+    </Auth> 
+  ); 
+} 
+ 
 export default Register;
